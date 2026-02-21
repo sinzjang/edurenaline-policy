@@ -17,6 +17,26 @@
       margin: 0 auto;
       padding: 60px 24px;
     }
+    .lang-switch {
+      text-align: right;
+      margin-bottom: 16px;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border: 1px solid #DDD;
+      border-radius: 8px;
+      background: #FFF;
+      font-size: 13px;
+      cursor: pointer;
+      margin-left: 4px;
+      color: #666;
+      transition: all 0.2s;
+    }
+    .lang-btn.active {
+      background: #6C5CE7;
+      color: #FFF;
+      border-color: #6C5CE7;
+    }
     .logo {
       text-align: center;
       margin-bottom: 48px;
@@ -61,28 +81,42 @@
       font-size: 13px;
       color: #AAA;
     }
+    [data-lang] { display: none; }
+    [data-lang="ko"] { display: block; }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+      <button class="lang-btn" onclick="setLang('en')">English</button>
+    </div>
+
     <div class="logo">
       <h1>EduRenaline</h1>
-      <p>집중력 훈련 앱</p>
+      <p data-lang="ko">집중력 훈련 앱</p>
+      <p data-lang="en">Focus Training App</p>
     </div>
 
     <a class="card" href="privacy-policy.html">
-      <h2>📋 개인정보처리방침 (Privacy Policy)</h2>
-      <p>개인정보 수집, 이용, 보관 및 삭제에 관한 정책</p>
+      <h2 data-lang="ko">📋 개인정보처리방침 (Privacy Policy)</h2>
+      <h2 data-lang="en">📋 Privacy Policy</h2>
+      <p data-lang="ko">개인정보 수집, 이용, 보관 및 삭제에 관한 정책</p>
+      <p data-lang="en">Policy on collection, use, storage, and deletion of personal information</p>
     </a>
 
     <a class="card" href="terms-of-service.html">
-      <h2>📄 이용약관 (Terms of Service)</h2>
-      <p>서비스 이용에 관한 약관</p>
+      <h2 data-lang="ko">📄 이용약관 (Terms of Service)</h2>
+      <h2 data-lang="en">📄 Terms of Service</h2>
+      <p data-lang="ko">서비스 이용에 관한 약관</p>
+      <p data-lang="en">Terms and conditions for using the service</p>
     </a>
 
     <a class="card" href="support.html">
-      <h2>💬 고객 지원 (Support)</h2>
-      <p>문의 및 지원 안내</p>
+      <h2 data-lang="ko">💬 고객 지원 (Support)</h2>
+      <h2 data-lang="en">💬 Support</h2>
+      <p data-lang="ko">문의 및 지원 안내</p>
+      <p data-lang="en">Contact and support information</p>
     </a>
 
     <div class="footer">
@@ -90,5 +124,18 @@
       <p>sinzjang@gmail.com</p>
     </div>
   </div>
+
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.includes(lang === 'ko' ? '한국어' : 'English'));
+      });
+      localStorage.setItem('lang', lang);
+    }
+    setLang(localStorage.getItem('lang') || 'ko');
+  </script>
 </body>
 </html>
