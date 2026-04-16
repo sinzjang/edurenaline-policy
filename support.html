@@ -3,144 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>고객 지원 - EduRenaline</title>
+  <title>고객 지원 — EduRenaline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #FAFAFA;
-      color: #1A1A1A;
-      line-height: 1.8;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --brand: #6C5CE7; --brand-light: #F2EFF8; --text: #1A1A2E;
+      --text-secondary: #64748B; --surface: #FFFFFF; --bg: #F8F7FF;
+      --border: #E8E5F8; --radius: 16px;
+      --shadow: 0 1px 3px rgba(108,92,231,0.08), 0 4px 16px rgba(108,92,231,0.06);
     }
-    .container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
-    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-    .back { color: #6C5CE7; text-decoration: none; font-size: 14px; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(248,247,255,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 24px; }
+    .nav-inner { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-logo { font-size: 17px; font-weight: 700; color: var(--brand); text-decoration: none; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .back { font-size: 14px; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+    .back:hover { color: var(--brand); }
     .lang-switch { display: flex; gap: 4px; }
-    .lang-btn {
-      padding: 6px 14px; border: 1px solid #DDD; border-radius: 8px;
-      background: #FFF; font-size: 13px; cursor: pointer; color: #666; transition: all 0.2s;
+    .lang-btn { padding: 5px 12px; border: 1px solid var(--border); border-radius: 100px; background: transparent; font-size: 13px; font-family: inherit; cursor: pointer; color: var(--text-secondary); transition: all 0.2s; }
+    .lang-btn.active { background: var(--brand); color: #FFF; border-color: var(--brand); }
+
+    .page-header { background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%); padding: 52px 24px 48px; }
+    .page-header-inner { max-width: 760px; margin: 0 auto; }
+    .page-header h1 { font-size: 32px; font-weight: 800; color: #FFF; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .page-header p { font-size: 16px; color: rgba(255,255,255,0.8); }
+
+    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    .contact-hero {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px; margin-bottom: 40px; box-shadow: var(--shadow);
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
     }
-    .lang-btn.active { background: #6C5CE7; color: #FFF; border-color: #6C5CE7; }
-    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-    .subtitle { font-size: 15px; color: #666; margin-bottom: 32px; }
-    h2 { font-size: 18px; font-weight: 600; margin-top: 32px; margin-bottom: 12px; color: #333; }
-    p, li { font-size: 15px; color: #444; margin-bottom: 8px; }
-    .contact-card {
-      background: #FFFFFF; border-radius: 16px; padding: 24px; margin-top: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-    .contact-card a { color: #6C5CE7; text-decoration: none; font-weight: 600; }
-    .faq-item {
-      background: #FFFFFF; border-radius: 12px; padding: 20px; margin-bottom: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-    .faq-item h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: #333; }
-    .faq-item p { font-size: 14px; color: #666; margin-bottom: 0; }
-    .footer { text-align: center; margin-top: 48px; font-size: 13px; color: #AAA; }
+    .contact-hero-icon { width: 56px; height: 56px; border-radius: 14px; background: var(--brand-light); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+    .contact-hero-text h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .contact-hero-text p { font-size: 14px; color: var(--text-secondary); }
+    .contact-hero-text a { color: var(--brand); font-weight: 600; text-decoration: none; }
+    .contact-hero-text a:hover { text-decoration: underline; }
+
+    .section-label { font-size: 13px; font-weight: 600; color: var(--brand); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 20px 24px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: inherit; }
+    .faq-q-text { font-size: 15px; font-weight: 600; color: var(--text); }
+    .faq-chevron { font-size: 18px; color: var(--text-secondary); transition: transform 0.2s; flex-shrink: 0; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 24px 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 16px; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-a a { color: var(--brand); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--text-secondary); }
+    footer a { color: var(--brand); text-decoration: none; }
+
     [data-lang] { display: none; }
-    [data-lang="ko"] { display: block; }
+    span[data-lang="ko"], div[data-lang="ko"] { display: inline; }
+    div[data-lang="ko"] { display: block; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="top-bar">
-      <a class="back" href="index.html">&larr; 돌아가기</a>
-      <div class="lang-switch">
-        <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
-        <button class="lang-btn" onclick="setLang('en')">English</button>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">EduRenaline</a>
+      <div class="nav-right">
+        <a class="back" href="index.html">← <span data-lang="ko">홈</span><span data-lang="en">Home</span></a>
+        <div class="lang-switch">
+          <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+          <button class="lang-btn" onclick="setLang('en')">English</button>
+        </div>
       </div>
     </div>
+  </nav>
 
-    <!-- Korean -->
-    <div data-lang="ko">
-      <h1>고객 지원</h1>
-      <p class="subtitle">EduRenaline 이용 중 궁금한 점이나 문제가 있으시면 언제든 연락해주세요.</p>
-
-      <div class="contact-card">
-        <h2 style="margin-top: 0;">📧 이메일 문의</h2>
-        <p><a href="mailto:sinzjang@gmail.com">sinzjang@gmail.com</a></p>
-        <p>영업일 기준 1~2일 이내에 답변드립니다.</p>
-      </div>
-
-      <h2>자주 묻는 질문 (FAQ)</h2>
-
-      <div class="faq-item">
-        <h3>Q. 회원 탈퇴는 어떻게 하나요?</h3>
-        <p>앱 내 프로필 화면 하단의 "회원 탈퇴" 버튼을 통해 직접 탈퇴할 수 있습니다. 탈퇴 시 모든 데이터가 즉시 삭제되며 복구할 수 없습니다.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Q. 게임 기록이 저장되지 않아요.</h3>
-        <p>로그인 상태를 확인해주세요. 로그인하지 않은 상태에서는 기기에만 기록이 저장되며, 로그인 시 서버에 동기화됩니다.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Q. 소리가 나오지 않아요.</h3>
-        <p>기기의 무음 모드를 해제하고, 볼륨을 확인해주세요. 일부 게임은 헤드폰 사용을 권장합니다.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Q. 앱이 갑자기 종료돼요.</h3>
-        <p>앱을 최신 버전으로 업데이트해주세요. 문제가 지속되면 앱을 삭제 후 재설치하거나 이메일로 문의해주세요.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Q. 개인정보는 어떻게 처리되나요?</h3>
-        <p><a href="privacy-policy.html">개인정보처리방침</a>을 참고해주세요. 최소한의 정보만 수집하며, 탈퇴 시 즉시 삭제됩니다.</p>
-      </div>
-    </div>
-
-    <!-- English -->
-    <div data-lang="en">
-      <h1>Support</h1>
-      <p class="subtitle">If you have any questions or issues while using EduRenaline, please don't hesitate to contact us.</p>
-
-      <div class="contact-card">
-        <h2 style="margin-top: 0;">📧 Email</h2>
-        <p><a href="mailto:sinzjang@gmail.com">sinzjang@gmail.com</a></p>
-        <p>We will respond within 1-2 business days.</p>
-      </div>
-
-      <h2>Frequently Asked Questions (FAQ)</h2>
-
-      <div class="faq-item">
-        <h3>Q. How do I delete my account?</h3>
-        <p>You can delete your account through the "Delete Account" button at the bottom of the Profile screen. All data will be immediately and permanently deleted.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Q. My game records are not being saved.</h3>
-        <p>Please check your login status. Records are only saved locally when not logged in, and will sync to the server once you log in.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Q. There is no sound.</h3>
-        <p>Please turn off silent mode and check the volume on your device. Some games recommend using headphones.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Q. The app crashes unexpectedly.</h3>
-        <p>Please update the app to the latest version. If the problem persists, try reinstalling the app or contact us via email.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Q. How is my personal information handled?</h3>
-        <p>Please refer to our <a href="privacy-policy.html">Privacy Policy</a>. We collect only minimal information, and all data is deleted immediately upon account deletion.</p>
-      </div>
-    </div>
-
-    <div class="footer">
-      <p>&copy; 2025 EduRenaline. All rights reserved.</p>
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1><span data-lang="ko">고객 지원</span><span data-lang="en">Support</span></h1>
+      <p><span data-lang="ko">EduRenaline 이용 중 궁금한 점이 있으시면 언제든 연락해주세요.</span><span data-lang="en">Have a question? We're here to help.</span></p>
     </div>
   </div>
 
+  <main>
+    <!-- Contact -->
+    <div class="contact-hero">
+      <div class="contact-hero-icon">📧</div>
+      <div class="contact-hero-text">
+        <h2><span data-lang="ko">이메일 문의</span><span data-lang="en">Email Us</span></h2>
+        <p><a href="mailto:sinzjang@gmail.com">sinzjang@gmail.com</a></p>
+        <p><span data-lang="ko">영업일 기준 1~2일 이내에 답변드립니다.</span><span data-lang="en">We respond within 1–2 business days.</span></p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <p class="section-label"><span data-lang="ko">자주 묻는 질문</span><span data-lang="en">FAQ</span></p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span data-lang="ko">회원 탈퇴는 어떻게 하나요?</span><span data-lang="en">How do I delete my account?</span></span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><span data-lang="ko">앱 내 프로필 화면 하단의 "회원 탈퇴" 버튼을 통해 직접 탈퇴할 수 있습니다. 탈퇴 시 모든 데이터가 즉시 삭제되며 복구할 수 없습니다.</span><span data-lang="en">You can delete your account through the "Delete Account" button at the bottom of the Profile screen. All data will be immediately and permanently deleted.</span></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span data-lang="ko">게임 기록이 저장되지 않아요.</span><span data-lang="en">My game records are not being saved.</span></span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><span data-lang="ko">로그인 상태를 확인해주세요. 로그인하지 않은 상태에서는 기기에만 기록이 저장되며, 로그인 시 서버에 동기화됩니다.</span><span data-lang="en">Please check your login status. Records are only saved locally when not logged in, and will sync to the server once you log in.</span></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span data-lang="ko">소리가 나오지 않아요.</span><span data-lang="en">There is no sound.</span></span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><span data-lang="ko">기기의 무음 모드를 해제하고, 볼륨을 확인해주세요. 일부 게임은 헤드폰 사용을 권장합니다.</span><span data-lang="en">Please turn off silent mode and check the volume on your device. Some games recommend using headphones.</span></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span data-lang="ko">앱이 갑자기 종료돼요.</span><span data-lang="en">The app crashes unexpectedly.</span></span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><span data-lang="ko">앱을 최신 버전으로 업데이트해주세요. 문제가 지속되면 앱을 삭제 후 재설치하거나 이메일로 문의해주세요.</span><span data-lang="en">Please update the app to the latest version. If the problem persists, try reinstalling or contact us via email.</span></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text"><span data-lang="ko">개인정보는 어떻게 처리되나요?</span><span data-lang="en">How is my personal information handled?</span></span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><span data-lang="ko"><a href="privacy-policy.html">개인정보처리방침</a>을 참고해주세요. 최소한의 정보만 수집하며, 탈퇴 시 즉시 삭제됩니다.</span><span data-lang="en">Please refer to our <a href="privacy-policy.html">Privacy Policy</a>. We collect only minimal information, deleted immediately upon account deletion.</span></div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 EduRenaline. &nbsp;|&nbsp;
+      <a href="privacy-policy.html"><span data-lang="ko">개인정보처리방침</span><span data-lang="en">Privacy Policy</span></a> &nbsp;|&nbsp;
+      <a href="terms-of-service.html"><span data-lang="ko">이용약관</span><span data-lang="en">Terms</span></a>
+    </p>
+  </footer>
+
   <script>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    }
     function setLang(lang) {
       document.querySelectorAll('[data-lang]').forEach(el => {
-        el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+        const tag = el.tagName.toLowerCase();
+        const isInline = ['span', 'a', 'strong', 'em'].includes(tag);
+        el.style.display = el.getAttribute('data-lang') === lang ? (isInline ? 'inline' : 'block') : 'none';
       });
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.includes(lang === 'ko' ? '한국어' : 'English'));
+        btn.classList.toggle('active', btn.textContent.trim() === (lang === 'ko' ? '한국어' : 'English'));
       });
       localStorage.setItem('lang', lang);
     }
